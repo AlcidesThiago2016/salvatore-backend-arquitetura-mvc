@@ -1,8 +1,8 @@
 const service = require('./personagem.service')
 
-function readAll(req, res){
-    const items = service.readAll()
-    
+async function readAll(req, res){
+    const items = await service.readAll()
+
     res.send(items)
 }
 
