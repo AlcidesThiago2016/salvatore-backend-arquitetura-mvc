@@ -25,15 +25,6 @@ async function main() {
 
     // FIX: mover isso para a pasta 'personagem'
     /*
-    // Endpoint Real All [GET] /personagem
-    app.get('/personagem',async function (req, res) {
-        // Acessando a lista de itens na collection do MongoDB
-        const itens = await collection.find().toArray()
-
-        // Enviando a lista de itens como resultado
-        res.send(itens)
-    })
-
     // Endpoint Ready By ID [GET] /personagem/:id
     app.get('/personagem/:id', async function (req, res) {
         // Acessar o parametro ID
