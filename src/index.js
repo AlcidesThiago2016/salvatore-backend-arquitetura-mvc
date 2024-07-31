@@ -1,30 +1,27 @@
 require('dotenv').config()
-const express = require("express")
-const { MongoClient, ObjectId } = require("mongodb")
-
-// Preparamos as informacoes de acesso ao BD
-const dbUrl = process.env.DATABASE_URL
-const dbName = 'mongodb-arquitetura-mvc'
+const express = require('express')
+const { connectToDataBase } = require('./db/database-connection')
+// const { MongoClient, ObjectId } = require("mongodb")
 
 // Declaramos a função main()
 async function main() {
-    // Realizamos a conexao ao BD
-    const client = new MongoClient(dbUrl)
-    console.log('Conectando ao banco de dados...')
-    await client.connect()
-    console.log('Banco de dados conectado com sucesso!')
+    // FIXME: utilizar o connectToDataBase() e receber o DB
+    await connectToDataBase()
 
-    const db = client.db(dbName)
-    const collection = db.collection('personagem')
+    //const collection = db.collection('personagem')
 
     const app = express()
+
+    // Middlewares
+    // Sinalizando para o express que utilizaremos JSON no Body
+    app.use(express.json())
 
     app.get("/", function (req, res) {
         res.send("Hello World!!")
     })
 
-    const lista = ['Java', 'Kotlin', 'Android']
-
+    // FIX: mover isso para a pasta 'personagem'
+    /*
     // Endpoint Real All [GET] /personagem
     app.get('/personagem',async function (req, res) {
         // Acessando a lista de itens na collection do MongoDB
@@ -56,8 +53,6 @@ async function main() {
         res.send('Numero total de itens: ${totalItens}')
     })
 
-    // Sinalizando para o express que utilizaremos JSON no Body
-    app.use(express.json())
 
     // Endpoint Create (POST) /personagem
     app.post('/personagem', async function (req, res) {
@@ -124,8 +119,11 @@ async function main() {
         // Enviando um Messagem de sucesso
         res.send('Item removido com sucesso: ' + id)
     })
+    */    
 
-    app.listen(3000)
+    app.listen(3000, function() {
+        console.log("Servidor rodando em http://localhost:3000")
+    })
 }
 // Fechamos a função main()
 
