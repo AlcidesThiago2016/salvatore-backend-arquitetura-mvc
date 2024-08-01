@@ -36,7 +36,13 @@ function updateById(id, newItem){
     )
 }
 
-function deleteById(){
+/**
+ * @param {string} id 
+ * @returns 
+ */
+function deleteById(id){
+    // Remover o item do BD usando o ID
+    return getCollection().deleteOne({_id: new ObjectId(id)})
 }
 
 module.exports = {
